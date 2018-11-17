@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter,
   Route,
+  Switch
 } from 'react-router-dom';
 import 'normalize.css/normalize.css'
 import './styles/style.scss'
@@ -47,10 +48,16 @@ class Edit extends React.Component {
   }
 }
 
+const EmptyPage = () => (
+  <div>
+    <p>This page doesn't exsist</p>
+  </div>
+)
+
 
 const routes = (
   <BrowserRouter>
-    <div>
+    <Switch>
       <Route
         path="/"
         component={App}
@@ -68,7 +75,10 @@ const routes = (
         path="/help"
         component={Help}
       />
-    </div>
+      <Route
+        component={EmptyPage}
+      />
+    </Switch>
   </BrowserRouter>
 );
 
