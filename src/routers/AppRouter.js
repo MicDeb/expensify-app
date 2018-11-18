@@ -27,7 +27,7 @@ const AppRouter = () => (
           component={AddExpanse}
         />
         <Route
-          path="/edit"
+          path="/edit/:id"
           component={EditExpanse}
         />
         <Route
