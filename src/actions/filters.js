@@ -1,6 +1,6 @@
-// EDIT EXPANSE
-export const editExpanse = (id, updates) => ({
-  type: 'EDIT_EXPANSE',
+// EDIT EXPENSE
+export const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
   id,
   updates
 });

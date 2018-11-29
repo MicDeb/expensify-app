@@ -1,16 +1,16 @@
 import React from 'react';
 
-class EditExpanse extends React.Component {
+class EditExpense extends React.Component {
   render() {
     const {
       match,
     } = this.props;
     return (
       <div>
-        <p>Editing the expanse with id of {match.params.id}</p>
+        <p>Editing the expense with id of {match.params.id}</p>
       </div>
     )
   }
 }
 
-export default EditExpanse;
+export default EditExpense;

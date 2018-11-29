@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addExpanse } from './actions/expanses';
+import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters' ;
-import getVisibleExpanses from './selectors/expanses';
+import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import './styles/style.scss';
 
 
 const store = configureStore();
 
-store.dispatch(addExpanse({description: 'Water bill'}));
-store.dispatch(addExpanse({description: 'Gas bill'}));
+store.dispatch(addExpense({description: 'Water bill'}));
+store.dispatch(addExpense({description: 'Gas bill'}));
 store.dispatch(setTextFilter('bill'));
 
 console.log(store.getState());
 
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+)
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'))
+
+ReactDOM.render(jsx, document.getElementById('app'))

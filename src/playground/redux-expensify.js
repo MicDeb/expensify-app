@@ -4,8 +4,8 @@ import uuid from 'uuid';
 
 // ACTIONS - CZYLI OBIEKTY
 
-// ADD EXPANSE
-const addExpanse = (
+// ADD EXPENSE
+const addExpense = (
   {
     description = '',
     note = '',
@@ -13,8 +13,8 @@ const addExpanse = (
     createdAt = 0
   } = {}
 ) => ({
-  type: 'ADD_EXPANSE',
-  expanse: {
+  type: 'ADD_EXPENSE',
+  expense: {
     id: uuid(),
     description,
     note,
@@ -23,16 +23,16 @@ const addExpanse = (
   }
 });
 
-// REMOVE EXPANSE
-const removeExpanse = ( { id } = {}) => ({
-  type: 'REMOVE_EXPANSE',
+// REMOVE EXPENSE
+const removeExpense = ( { id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
   id
 });
 
 
-// EDIT EXPANSE
-const editExpanse = (id, updates) => ({
-  type: 'EDIT_EXPANSE',
+// EDIT EXPENSE
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
   id,
   updates
 });
@@ -66,26 +66,26 @@ const setEndDate = date => ({
 })
 
 
-const expansesReducerDefaultStore = [];
+const expensesReducerDefaultStore = [];
 
-const expansesReducer = (state = expansesReducerDefaultStore, action) => {
+const expensesReducer = (state = expensesReducerDefaultStore, action) => {
   switch (action.type) {
-    case 'ADD_EXPANSE':
+    case 'ADD_EXPENSE':
       return [
         ...state,
-        action.expanse
+        action.expense
       ];
-    case 'REMOVE_EXPANSE':
+    case 'REMOVE_EXPENSE':
       return state.filter(({ id }) => id !== action.id );
-    case 'EDIT_EXPANSE':
-      return state.map((expanse) => {
-        if (expanse.id === action.id) {
+    case 'EDIT_EXPENSE':
+      return state.map((expense) => {
+        if (expense.id === action.id) {
           return {
-            ...expanse,
+            ...expense,
             ...action.updates
           }
         } else {
-          return expanse;
+          return expense;
         }
       });
     default:
@@ -135,13 +135,13 @@ const filtersReducers = ( state = filtersReducersDefaultState, action ) => {
   }
 }
 
-// Get visible expanses
+// Get visible expenses
 
-const getVisibleExpanses = (expanses, { text, sortBy, startDate, endDate }) => {
-  return expanses.filter((expanse) => {
-    const startDateMatch = typeof startDate !== 'number' || expanse.createdAt >= startDate;
-    const endDateMatch = typeof endDate !== 'number' || expanse.endDate <= endDate;
-    const textMatch = expanse.description.toLowerCase().includes(text.toLowerCase());
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter((expense) => {
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || expense.endDate <= endDate;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
     return startDateMatch && endDateMatch && textMatch;
   }).sort((a, b) => {
@@ -158,23 +158,23 @@ const getVisibleExpanses = (expanses, { text, sortBy, startDate, endDate }) => {
 // Store creation
 const store = createStore(
   combineReducers({
-    expanses: expansesReducer,
+    expenses: expensesReducer,
     filters: filtersReducers
   })
 )
 
 store.subscribe(() => {
   const state = store.getState();
-  const visibleExpanses = getVisibleExpanses(state.expanses, state.filters);
-  console.log(visibleExpanses);
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 })
 
-const expanseOne = store.dispatch(addExpanse({ description: 'Rent', amount: 100, createdAt: -11000 }));
-const expanseTwo = store.dispatch(addExpanse({ description: 'Coffee', amount: 300, createdAt: -1000 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100, createdAt: -11000 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300, createdAt: -1000 }));
 //
-// store.dispatch(removeExpanse({ id: expanseOne.expanse.id }));
+// store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 //
-// store.dispatch(editExpanse(expanseTwo.expanse.id, { amount: 500 }));
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 //
 // store.dispatch(setTextFilter('rent'));
 // store.dispatch(setTextFilter());
@@ -187,7 +187,7 @@ const expanseTwo = store.dispatch(addExpanse({ description: 'Coffee', amount: 30
 // store.dispatch(setEndDate(999));
 
 const demoState = {
-  expanses: [{
+  expenses: [{
     id: 'aaa',
     description: 'January rent',
     note: 'This was the final pament for that address',

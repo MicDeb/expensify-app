@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class AddExpanse extends Component {
+class AddExpense extends Component {
   render() {
     return (
       <div>
-        <p>New expanse</p>
+        <p>New expense</p>
       </div>
     )
   }
 }
 
-export default AddExpanse;
+export default AddExpense;

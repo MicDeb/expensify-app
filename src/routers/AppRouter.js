@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from '../components/Dashboard';
-import AddExpanse from '../components/AddExpanse';
-import EditExpanse from '../components/EditExpanse';
+import AddExpense from '../components/AddExpense';
+import EditExpense from '../components/EditExpense';
 import Help from '../components/Help';
 import Header from '../components/Header';
 import NotFoundPage from '../components/NotFoundPage';
@@ -24,11 +24,11 @@ const AppRouter = () => (
         />
         <Route
           path="/create"
-          component={AddExpanse}
+          component={AddExpense}
         />
         <Route
           path="/edit/:id"
-          component={EditExpanse}
+          component={EditExpense}
         />
         <Route
           path="/help"

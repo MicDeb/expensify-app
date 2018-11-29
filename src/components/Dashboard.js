@@ -1,10 +1,11 @@
 import React from 'react';
+import ExpenseList from './ExpenseList';
 
 class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <p>new aplication</p>
+        <ExpenseList />
       </div>
     )
   }
